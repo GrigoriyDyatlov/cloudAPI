@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import ru.netology.cloudAPI.entity.FileMetadata;
 import ru.netology.cloudAPI.service.FileStorageService;
+import ru.netology.cloudAPI.util.JwtUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,13 +25,14 @@ public class FileController {
     @Autowired
     private FileStorageService fileStorageService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @PostMapping("/upload")
     public ResponseEntity<FileMetadata> uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
-        // Extract user ID from the JWT (example)
         String authorizationHeader = request.getHeader("Authorization");
         String token = authorizationHeader.substring(7);
-        // Assuming you have a method to extract the user ID from the token
-        String userId = "1"; //jwtUtil.extractUserId(token); // Replace with actual extraction
+        String userId = jwtUtil.extractUsername(token);
 
         FileMetadata metadata = fileStorageService.storeFile(file, userId);
         return ResponseEntity.ok(metadata);
@@ -60,10 +62,9 @@ public class FileController {
 
     @GetMapping("/list")
     public List<FileMetadata> listFiles(HttpServletRequest request) {
-        // Extract user ID from JWT
         String authorizationHeader = request.getHeader("Authorization");
         String token = authorizationHeader.substring(7);
-        String userId = "1";//jwtUtil.extractUserId(token); // Replace with actual extraction
+        String userId = jwtUtil.extractUsername(token);
         return fileStorageService.getFilesByUserId(userId);
     }
 
