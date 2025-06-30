@@ -1,7 +1,5 @@
 package ru.netology.cloudAPI.config;
 
-import ru.netology.cloudAPI.filter.JwtRequestFilter;
-import ru.netology.cloudAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.netology.cloudAPI.filter.JwtRequestFilter;
+import ru.netology.cloudAPI.service.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -45,8 +45,8 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/*").permitAll() // Allow authentication endpoint
-                        .requestMatchers("/api/files/*").authenticated() // Secure file endpoints
+                        .requestMatchers("/cloud/login/*").permitAll() // Allow authentication endpoint
+                        .requestMatchers("/cloud/files/*").authenticated() // Secure file endpoints
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

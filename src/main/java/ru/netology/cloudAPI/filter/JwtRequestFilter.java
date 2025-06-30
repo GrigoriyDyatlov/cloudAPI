@@ -1,7 +1,5 @@
 package ru.netology.cloudAPI.filter;
 
-import ru.netology.cloudAPI.service.UserService;
-import ru.netology.cloudAPI.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import ru.netology.cloudAPI.service.UserService;
+import ru.netology.cloudAPI.util.JwtUtil;
 
 import java.io.IOException;
 

@@ -1,9 +1,5 @@
 package ru.netology.cloudAPI.controller;
 
-import ru.netology.cloudAPI.dto.AuthenticationRequest;
-import ru.netology.cloudAPI.dto.AuthenticationResponse;
-import ru.netology.cloudAPI.service.UserService;
-import ru.netology.cloudAPI.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.netology.cloudAPI.dto.AuthenticationRequest;
+import ru.netology.cloudAPI.dto.AuthenticationResponse;
+import ru.netology.cloudAPI.service.UserService;
+import ru.netology.cloudAPI.util.JwtUtil;
 
 @RestController
 @RequestMapping("/cloud/login")
